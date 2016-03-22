@@ -17,6 +17,7 @@ angular.module('helloAngular.controllers')
                 messages: [],
                 rooms: ["NodeJS", "Angular", "Work", "Sport", "Zever"]
             };
+            $scope.dataService = dataService;
 
             $scope.toggleLeftNav = function toggleLeftNav() {
                 $mdSidenav('left').toggle();
