@@ -3,8 +3,9 @@ angular.module('helloAngular.controllers')
 
         '$scope',
         '$timeout',
+        '$mdSidenav',
 
-        function($scope, $timeout) {
+        function($scope, $timeout, $mdSidenav) {
 
             //
             // SCOPE & MODEL PROPERTIES --------------------------------
@@ -13,6 +14,10 @@ angular.module('helloAngular.controllers')
             $scope.data = {
                 messages: [],
                 rooms: ["NodeJS", "Angular", "Work", "Sport", "Zever"]
+            };
+
+            $scope.toggleLeftNav = function toggleLeftNav() {
+                $mdSidenav('left').toggle();
             };
 
             //
@@ -30,8 +35,7 @@ angular.module('helloAngular.controllers')
                 }, 500);
             };
 
-            var initialize = function initialize() {
-            };
+            var initialize = function initialize() {};
 
             initialize();
         }
