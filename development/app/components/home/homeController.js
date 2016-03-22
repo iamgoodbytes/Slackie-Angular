@@ -5,7 +5,9 @@ angular.module('helloAngular.controllers')
         '$timeout',
         '$mdSidenav',
 
-        function($scope, $timeout, $mdSidenav) {
+        'dataService',
+
+        function($scope, $timeout, $mdSidenav, dataService) {
 
             //
             // SCOPE & MODEL PROPERTIES --------------------------------
@@ -18,6 +20,11 @@ angular.module('helloAngular.controllers')
 
             $scope.toggleLeftNav = function toggleLeftNav() {
                 $mdSidenav('left').toggle();
+            };
+
+            $scope.toggleRoom = function toggleRoom(room) {
+                dataService.room = room;
+                $scope.toggleLeftNav();
             };
 
             //

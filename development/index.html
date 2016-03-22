@@ -22,7 +22,7 @@
                 <h2 class="md-toolbar-tools">Rooms</h2>
             </md-toolbar>
             <md-content>
-                <md-list-item ng-repeat="room in data.rooms">
+                <md-list-item ng-repeat="room in data.rooms" ng-click="toggleRoom(room)">
                     <p> {{ room }} </p>
                 </md-list-item>
             </md-content>
