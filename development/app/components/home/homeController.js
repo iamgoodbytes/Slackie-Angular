@@ -3,12 +3,13 @@ angular.module('helloAngular.controllers')
 
         '$scope',
         '$timeout',
+        '$interval',
         '$mdSidenav',
 
         'dataService',
         'dataFactory',
 
-        function($scope, $timeout, $mdSidenav, dataService, dataFactory) {
+        function($scope, $timeout, $interval, $mdSidenav, dataService, dataFactory) {
 
             //
             // SCOPE & MODEL PROPERTIES --------------------------------
@@ -28,6 +29,21 @@ angular.module('helloAngular.controllers')
                 dataService.room = room;
                 getMessages();
                 $scope.toggleLeftNav();
+            };
+
+            $scope.sendMessage = function sendMessage() {
+                if ($scope.data.message) {
+                    var message = {
+                        name: dataService.name,
+                        room: dataService.room,
+                        content: $scope.data.message
+                    };
+                    dataFactory.postMessage(message).success(function(result) {
+                        $scope.data.messages.push(result);
+                        scrollToBottom();
+                    });
+                    $scope.data.message = "";
+                }
             };
 
             //
@@ -54,7 +70,11 @@ angular.module('helloAngular.controllers')
                 }, 500);
             };
 
-            var initialize = function initialize() {};
+            var initialize = function initialize() {
+                $interval(function() {
+                    getMessages();
+                }, 1000);
+            };
 
             initialize();
         }

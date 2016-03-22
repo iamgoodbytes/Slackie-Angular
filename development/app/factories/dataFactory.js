@@ -15,6 +15,10 @@ angular.module('helloAngular.factories')
                 return $http.get(url + "room/" + room, {});
             };
 
+            factory.postMessage = function postMessage(message) {
+                return $http.post(url, message);
+            };
+
             return factory;
         }
     ]);
