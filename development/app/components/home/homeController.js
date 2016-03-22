@@ -6,8 +6,9 @@ angular.module('helloAngular.controllers')
         '$mdSidenav',
 
         'dataService',
+        'dataFactory',
 
-        function($scope, $timeout, $mdSidenav, dataService) {
+        function($scope, $timeout, $mdSidenav, dataService, dataFactory) {
 
             //
             // SCOPE & MODEL PROPERTIES --------------------------------
@@ -25,6 +26,7 @@ angular.module('helloAngular.controllers')
 
             $scope.toggleRoom = function toggleRoom(room) {
                 dataService.room = room;
+                getMessages();
                 $scope.toggleLeftNav();
             };
 
@@ -35,6 +37,15 @@ angular.module('helloAngular.controllers')
             //
             // PRIVATE METHODS -----------------------------------------
             //
+
+            var getMessages = function getMessages() {
+                if (dataService.room !== '') {
+                    dataFactory.getMessagesByRoom(dataService.room).success(function(data) {
+                        $scope.data.messages = data;
+                        scrollToBottom();
+                    });
+                }
+            };
 
             var scrollToBottom = function scrollToBottom() {
                 $timeout(function() {
